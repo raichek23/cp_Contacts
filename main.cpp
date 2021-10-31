@@ -4,7 +4,46 @@
 #include <fstream>
 #include <sstream>
 
-using namespace std;
+#define NAME_LENGTH 50
+
+enum Gender
+{
+    MALE,
+    FEMALE
+};
+
+struct Person
+{
+    char name[NAME_LENGTH];
+    int  age;
+    enum Gender gender;
+};
+
+void showPerson(Person[], int);
+void showPerson(Person&);
+
+void showPerson(Person p[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        // ポインタでなくそのまま渡す
+        showPerson(p[i]);
+        std::cout << std::endl;
+    }
+}
+
+// 引数pは参照渡し
+void showPerson(Person &p)
+{
+    std::cout << "name: " << p.name << "¥n";
+    std::cout << "age : " << p.age  << "¥n";
+    if (p.gender == MALE)
+    {
+        std::cout << "gender: 男" << std::endl;
+    } else {
+        std::cout << "gender: 女" << std::endl;
+    }
+}
 
 // class Contact {
 // private:
@@ -59,17 +98,17 @@ char getDatetimeStr() {
 // メニュー表示
 int viewMenu() {
     int input = 0;       // 入力値
-    cout << "==========" << endl;
-    cout << "1. ADD" << endl;
-    cout << "2. VIEW" << endl;
-    cout << "3. DELETE" << endl;
-    cout << "4. MANAGE STATIC" << endl;
-    cout << "5. MANAGE HEAP" << endl;
-    cout << "6. MANAGE FILE" << endl;
-    cout << "7. MANAGE DB" << endl;
-    cout << "8. END" << endl;
-    cout << "==========" << endl;
-    cin >> input;
+    std::cout << "=========="       << std::endl;
+    std::cout << "1. ADD"           << std::endl;
+    std::cout << "2. VIEW"          << std::endl;
+    std::cout << "3. DELETE"        << std::endl;
+    std::cout << "4. MANAGE STATIC" << std::endl;
+    std::cout << "5. MANAGE HEAP"   << std::endl;
+    std::cout << "6. MANAGE FILE"   << std::endl;
+    std::cout << "7. MANAGE DB"     << std::endl;
+    std::cout << "8. END"           << std::endl;
+    std::cout << "=========="       << std::endl;
+    std::cin >> input;
     return input;
 }
 
@@ -85,7 +124,7 @@ int main() {
         input = viewMenu();
         switch(input) {
             case 1:
-                cout << "Please enter your name." << endl;
+                std::cout << "Please enter your name." << std::endl;
                 break;
             case 2:
                 break;
@@ -97,10 +136,10 @@ int main() {
                 break;
             case 6:
                 if(!ofs) {
-                    cout << "Can't open the file." << endl;
+                    std::cout << "Can't open the file." << std::endl;
                     cin.get();
                 } else {
-                    ofs << "Hello, world!2" << endl;
+                    ofs << "Hello, world!2" << std::endl;
                     cin.get();
                 }
                 break;
@@ -109,7 +148,7 @@ int main() {
             case 8:
                 break;
             default:
-                cout << "Please enter a number within the range 1-8." << endl;
+                std::cout << "Please enter a number within the range 1-8." << std::endl;
         }
         if(input == 8) {
             return 0;
