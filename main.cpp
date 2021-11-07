@@ -118,6 +118,14 @@ int viewMenu() {
 int main() {
     const char *fileName = getDatetimeStr();
     ofstream ofs(fileName);
+    
+    Person person[] = 
+    {
+        {"Adam" , 20, MALE},
+        {"Daisy", 25, FEMALE},
+    };
+    
+    ShowPerson(person, sizeof(person)/sizeof(Person[0]));
 
     while(1) {
         int input = 0;
